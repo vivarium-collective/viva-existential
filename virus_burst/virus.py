@@ -1,6 +1,8 @@
 """
-The virus module. When the cell's viral mass
+The virus module. When a cell's viral mass
 reaches a critical value, it bursts and replaces the cell with nothing.
+
+This is simulated for a population of cells.
 """
 
 from process_bigraph import Composite, Process, Step, allocate_core
@@ -71,7 +73,7 @@ class Lyse(Step):
 # Preparing the model. A population of ten cells will be generated,
 # each with a randomized amount of viral mass in the range (0,1.0].
 
-def initialize_population(viral_rate, lytic_threshold):
+def build_virus_sim(viral_rate, lytic_threshold):
     """
     Assemble the population of cells with a randomized amount of viral mass.
     """
@@ -108,7 +110,7 @@ def initialize_population(viral_rate, lytic_threshold):
 # Prepare simulation
 
 def main():
-    composite = initialize_population(viral_rate=0.125, lytic_threshold=2.5)
+    composite = build_virus_sim(viral_rate=0.125, lytic_threshold=2.5)
     print_cells(0,composite.state['cells'])
     for t in range(1, 30):
         composite.run(1.0)
